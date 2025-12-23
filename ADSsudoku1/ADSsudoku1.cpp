@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <fstream>
+#include <conio.h>
 
 #include <vector>
 #include <string>
@@ -139,6 +140,7 @@ static void printSudoku(int** Table)
 		}
 		std::cout << std::endl;
 	}
+	std::cout << std::endl;
 }
 
 //функция решения тестовой задачи:
@@ -338,7 +340,7 @@ private:
 			int const num = solution[k] % 9;
 			grid_solution[row][col] = num;
 		}
-		std::cout << "DL Solved sudoku:" << std::endl;
+		std::cout << "\nDLX Solved sudoku:" << std::endl;
 		for (int i = 0; i < 9; ++i)
 		{
 			for (int j = 0; j < 9; ++j)
@@ -347,6 +349,7 @@ private:
 			}
 			std::cout << std::endl;
 		}
+		std::cout << std::endl;
 	}
 
 
@@ -402,12 +405,17 @@ void main()
 	if (!getSudoku(fieldFileName, Sud)) return;
 	std::cout << "Initial sudoku:\n";
 	printSudoku(Sud);
-	enum_solve2(Sud);
+	enum_solve(Sud);
 	std::cout << "Solved sudoku:\n";
+	printSudoku(Sud);
+	if (!getSudoku(fieldFileName, Sud)) return;
+	enum_solve2(Sud);
+	std::cout << "Limited Solved sudoku:\n";
 	printSudoku(Sud);
 	Sudoku sudoku;
 	if (!getSudoku(fieldFileName, Sud)) return;
 	sudoku.loadGridAndSolve(Sud);
 	//Решение всех досок и нахождение общей суммы первых трех цифр:
 	std::cout << "Sum of solved tables = " << solveAll(fieldsFileName) << std::endl;
+	_getch();
 }
